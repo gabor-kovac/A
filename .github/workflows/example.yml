@@ -27,4 +27,3 @@ jobs:
         with:
           repository: 'gabor-kovac/B'
           branch: 'main'
-          force: true
