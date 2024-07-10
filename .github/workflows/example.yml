@@ -10,6 +10,7 @@ jobs:
         with:
           repository: 'gabor-kovac/B'
           ref: 'main'
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create file
         run: |
