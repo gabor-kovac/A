@@ -1,0 +1,31 @@
+name: Commit on another repo workflow
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  CommitOnRepo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: 'gabor-kovac/B'
+          ref: 'main'
+
+      - name: Create file
+        run: |
+          echo "$(date +%N)" > test.txt
+
+      - name: Commit changes for repository file
+        run: |
+          git config --local user.email "gabor.kovac@ametek.com"
+          git config --local user.name "gabor-kovac"
+          git add test.txt
+          git commit -m "Update ${{ github.event.repository.name }} summary files"
+
+      - name: Push changes to StatusTracker repository
+        uses: ad-m/github-push-action@master
+        with:
+          repository: 'gabor-kovac/B'
+          branch: 'main'
+          force: true
